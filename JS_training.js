@@ -1,7 +1,4 @@
-var buttonPlus = document.getElementById('buttonPlus');
-var buttonMinus = document.getElementById('buttonMinus');
-var buttonMultiply = document.getElementById('buttonMultiply');
-var buttonDevide = document.getElementById('buttonDevide');
+var operationButtons = document.getElementsByClassName('operation-button')
 
 function doing(argument) {
     var input1 = document.getElementById('number1');
@@ -18,33 +15,23 @@ function doing(argument) {
         case '-':
             summ=number1-number2;
             break
-        case '*':
-            summ = number*number2;
         case '/':
-        summ = number1/number2
+            summ = number1/number2;
+            break
+        default:
+            summ = number1*number2
     }
     window.alert(summ)
 
  }
 
-function onButtonPlusClick() {
-    doing('+')
-    
+function onOperationButtonClick(eventObject) {
+    var clickedElement = eventObject.currentTarget;
+    var operation = clickedElement.innerHTML;
+    doing(operation);
 }
 
-function onButtonMinusClick() {
-    doing('-')
+for (var i = 0; i < operationButtons.length; i++) {
+    var button = operationButtons[i]; 
+    button.addEventListener('click', onOperationButtonClick);
 }
-
-function onButtonMultiplyClick() {
-    doing('*')
-}
-
-function onButtonDevideClick() {
-    doing('/')
-}
-
-buttonPlus.addEventListener('click', onButtonPlusClick);
-buttonMinus.addEventListener('click', onButtonMinusClick);
-buttonMultiply.addEventListener('click', onButtonMultiplyClick);
-buttonDevide.addEventListener('click', onButtonDevideClick);
